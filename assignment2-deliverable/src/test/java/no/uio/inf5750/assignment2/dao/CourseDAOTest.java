@@ -1,0 +1,81 @@
+package no.uio.inf5750.assignment2.dao;
+import static org.junit.Assert.*;
+import no.uio.inf5750.assignment2.model.Course;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath*:/META-INF/assignment2/beans.xml" })
+@Transactional
+public class CourseDAOTest {
+@Autowired
+CourseDAO courseDAO;
+Course course = new Course("INF5750", "INF5750-navn");
+int courseId;
+public void setCourseDAO(CourseDAO courseDAO) {
+this.courseDAO = courseDAO;	
+}
+/**
+* @throws java.lang.Exception
+*/
+@BeforeClass
+public static void setUpBeforeClass() throws Exception {
+}
+/**
+* @throws java.lang.Exception
+*/
+@AfterClass
+public static void tearDownAfterClass() throws Exception {
+}
+@Test
+public void testSaveCourse() {
+//Course testCourse = courseDAO.getCourse(course.getId());
+//assertNotNull(testCourse);
+courseDAO.saveCourse(course);
+assertNotNull(courseDAO.getCourse(course.getId()));
+}
+@Test
+public void testGetCourse() {
+Course test = new Course("11", "11");
+courseDAO.saveCourse(test);
+assertNotNull(courseDAO.getCourse(test.getId()));
+}
+@Test
+public void testGetCourseByCourseCode() {
+Course test = new Course("Test", "Testcourse");
+courseDAO.saveCourse(test);
+assertNotNull(courseDAO.getCourseByCourseCode("Test1000"));
+}
+@Test
+public void testGetCourseByName() {
+Course test = new Course("Test", "Testcourse");
+courseDAO.saveCourse(test);
+assertNotNull(courseDAO.getCourseByName("Testcourse"));
+}
+@Test
+public void testGetAllCourses() {
+Course test1 = new Course("TestA", "TestcourseA");
+Course test2 = new Course("TestB", "TestcourseB");
+Course test3 = new Course("TestC", "TestcourseC");
+courseDAO.saveCourse(test1);
+courseDAO.saveCourse(test2);
+courseDAO.saveCourse(test3);
+assertTrue(courseDAO.getAllCourses().contains(test1));	
+assertTrue(courseDAO.getAllCourses().contains(test2));	
+assertTrue(courseDAO.getAllCourses().contains(test3));	
+}
+@Test
+public void testDelCourse() {
+Course test = new Course("Test", "Testcourse");
+courseDAO.saveCourse(test);
+courseDAO.delCourse(test);
+assertFalse(courseDAO.getAllCourses().contains(test));
+}
+}
+
+

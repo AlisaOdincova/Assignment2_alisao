@@ -33,14 +33,14 @@
             <version>1.2</version>
         </dependency>
 		
-		<!-- May need commenting in/out, depending on your environment -->
-		<!-- 
-		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>jsp-api</artifactId>
-		    <version>2.5</version>
-		</dependency>
-        -->
+<!-- 		May need commenting in/out, depending on your environment -->
+		
+<!-- 		<dependency> -->
+<!-- 		    <groupId>javax.servlet</groupId> -->
+<!-- 		    <artifactId>jsp-api</artifactId> -->
+<!-- 		    <version>2.5</version> -->
+<!-- 		</dependency> -->
+       
                 
         <dependency>
             <groupId>junit</groupId>
